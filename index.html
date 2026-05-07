@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education and Employment Forms</title>
+    <style>
+        :root {
+            --primary-blue: #1a73e8;
+            --primary-blue-hover: #1557b0;
+            --button-gray: #cdd1d5;
+            --text-dark: #202124;
+            --text-gray: #5f6368;
+            --border-color: #dadce0;
+            --bg-color: #f8f9fa;
+            --error-red: #d93025;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 40px;
+            color: var(--text-dark);
+            flex-wrap: wrap;
+        }
+
+        .form-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            padding: 32px;
+            width: 100%;
+            max-width: 380px;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .required {
+            color: var(--error-red);
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            background-color: #fff;
+            color: var(--text-dark);
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%239aa0a6%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat, repeat;
+            background-position: right .7em top 50%, 0 0;
+            background-size: .65em auto, 100%;
+        }
+
+        .flex-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .flex-col {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-group input[type="checkbox"], .radio-item input[type="radio"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #b9babb;
+            border-radius: 4px;
+            margin-right: 10px;
+            display: grid;
+            place-content: center;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"]::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--primary-blue);
+            background-color: var(--primary-blue);
+            transform-origin: center;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        .checkbox-group input[type="checkbox"]:checked {
+            border-color: var(--primary-blue);
+        }
+
+        .checkbox-group input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+
+        .radio-item input[type="radio"] {
+            border-radius: 50%;
+        }
+
+        .radio-item input[type="radio"]::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--primary-blue);
+            background-color: var(--primary-blue);
+        }
+
+        .radio-item input[type="radio"]:checked {
+            border-color: var(--primary-blue);
+        }
+
+        .radio-item input[type="radio"]:checked::before {
+            transform: scale(1);
+        }
+
+        .checkbox-label {
+            font-size: 13px;
+            color: var(--text-gray);
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            gap: 15px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-label-text {
+            font-size: 13px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-back {
+            background-color: var(--button-gray);
+            color: #fff;
+        }
+
+        .btn-back:hover {
+            background-color: #b5b9bd;
+        }
+
+        .btn-continue {
+            background-color: var(--primary-blue);
+            color: #fff;
+        }
+
+        .btn-continue:hover {
+            background-color: var(--primary-blue-hover);
+        }
+
+        .zip-code-input {
+            width: 40% !important;
+        }
+
+        /* Utility class to hide elements */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- EDUCATION FORM -->
+    <form class="form-card" id="educationForm" onsubmit="event.preventDefault(); alert('Education Form Submitted successfully!');">
+        <div class="form-group flex-row">
+            <div class="flex-col">
+                <label>Attended From Date<span class="required">*</span></label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="November">November</option>
+                </select>
+            </div>
+            <div class="flex-col">
+                <label>&nbsp;</label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="2018">2018</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group flex-row">
+            <div class="flex-col">
+                <label>Attended To Date<span class="required">*</span></label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="October">October</option>
+                </select>
+            </div>
+            <div class="flex-col">
+                <label>&nbsp;</label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="2022">2022</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group flex-row">
+            <div class="flex-col">
+                <label>Graduation Date<span class="required">*</span></label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="October">October</option>
+                </select>
+            </div>
+            <div class="flex-col">
+                <label>&nbsp;</label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="2022">2022</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="eduNotGraduated">
+            <label for="eduNotGraduated" class="checkbox-label">Not Graduated.</label>
+        </div>
+
+        <!-- NEW: International Address Checkbox for Education -->
+        <div class="checkbox-group">
+            <input type="checkbox" id="eduIntlAddress">
+            <label for="eduIntlAddress" class="checkbox-label" style="color: var(--text-dark);">International Address</label>
+        </div>
+
+        <!-- Modified: Changed to mandatory -->
+        <div class="form-group">
+            <label>Institution Address<span class="required">*</span></label>
+            <input type="text" value="Brook Street" required>
+        </div>
+
+        <div class="form-group">
+            <label>Institution City<span class="required">*</span></label>
+            <input type="text" value="Church City" required>
+        </div>
+
+        <!-- NEW: Institution Country (Hidden by default, shown if International Address is checked) -->
+        <div class="form-group hidden" id="eduCountryGroup">
+            <label>Institution Country<span class="required">*</span></label>
+            <input type="text" id="eduCountryInput" placeholder="Enter Country">
+        </div>
+
+        <!-- Modified: Default Dropdown for US States, hidden Text Input for Intl -->
+        <div class="form-group">
+            <label>Institution State<span class="required">*</span></label>
+            <select id="eduStateSelect" required>
+                <option value="" disabled>Select State</option>
+                <option value="New York">New York</option>
+                <option value="California" selected>California</option>
+                <option value="Texas">Texas</option>
+                <option value="Florida">Florida</option>
+            </select>
+            <input type="text" id="eduStateInput" class="hidden" placeholder="Enter State/Province">
+        </div>
+
+        <div class="checkbox-group">
+            <input type="checkbox" id="transcript">
+            <label for="transcript" class="checkbox-label">Transcript/Diploma Available</label>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn btn-back">Back</button>
+            <button type="submit" class="btn btn-continue">Continue</button>
+        </div>
+    </form>
+
+    <!-- EMPLOYMENT FORM -->
+    <form class="form-card" id="employmentForm" onsubmit="event.preventDefault(); alert('Employment Form Submitted successfully!');">
+        <div class="form-group">
+            <label>Employer Company Name<span class="required">*</span></label>
+            <input type="text" value="Google" required>
+        </div>
+
+        <div class="form-group">
+            <label>Position<span class="required">*</span></label>
+            <input type="text" value="Data Engineering Specialist" required>
+        </div>
+
+        <div class="form-group flex-row">
+            <div class="flex-col">
+                <label>Month Started<span class="required">*</span></label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="February">February</option>
+                </select>
+            </div>
+            <div class="flex-col">
+                <label>Year Started<span class="required">*</span></label>
+                <select required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="2025">2025</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="checkbox-group" style="margin-bottom: 6px;">
+            <input type="checkbox" id="selfEmployed">
+            <label for="selfEmployed" class="checkbox-label">I am self-employed</label>
+        </div>
+        <div class="checkbox-group" style="margin-bottom: 6px;">
+            <input type="checkbox" id="stillWorkHere">
+            <label for="stillWorkHere" class="checkbox-label">I still work here</label>
+        </div>
+        
+        <div class="radio-group" style="margin-bottom: 24px;">
+            <div class="radio-item">
+                <input type="radio" name="contactPermission" id="contactYes">
+                <label for="contactYes" class="checkbox-label">Yes</label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="contactPermission" id="contactNo">
+                <label for="contactNo" class="checkbox-label">No</label>
+            </div>
+            <span class="radio-label-text" style="margin-left: 10px;">Permission to contact</span>
+        </div>
+
+        <!-- NEW: International Address Checkbox for Employment -->
+        <div class="checkbox-group" style="margin-bottom: 20px;">
+            <input type="checkbox" id="empIntlAddress">
+            <label for="empIntlAddress" class="checkbox-label" style="color: var(--text-dark); font-weight: bold;">International Address</label>
+        </div>
+
+        <!-- NEW: Country Field (Hidden by default, shown if International Address is checked) -->
+        <div class="form-group hidden" id="empCountryGroup">
+            <label>Country Name<span class="required">*</span></label>
+            <input type="text" id="empCountryInput" placeholder="Enter Country">
+        </div>
+
+        <div class="form-group">
+            <label>Company Address<span class="required">*</span></label>
+            <input type="text" value="Hill Ford View" required>
+        </div>
+
+        <div class="form-group">
+            <label>Zip Code<span class="required">*</span></label>
+            <input type="text" value="11211" class="zip-code-input" required>
+        </div>
+
+        <div class="form-group">
+            <label>City<span class="required">*</span></label>
+            <input type="text" value="Brooklyn" required>
+        </div>
+
+        <div class="form-group">
+            <label>State<span class="required">*</span></label>
+            <select id="empStateSelect" required>
+                <option value="" disabled>Select State</option>
+                <option value="New York" selected>New York</option>
+                <option value="California">California</option>
+                <option value="Texas">Texas</option>
+                <option value="Florida">Florida</option>
+            </select>
+            <input type="text" id="empStateInput" class="hidden" placeholder="Enter State/Province">
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn btn-back">Back</button>
+            <button type="submit" class="btn btn-continue">Continue</button>
+        </div>
+    </form>
+
+    <!-- Logic for International Address Toggles -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Education Form Logic ---
+            const eduIntlCheckbox = document.getElementById('eduIntlAddress');
+            const eduCountryGroup = document.getElementById('eduCountryGroup');
+            const eduCountryInput = document.getElementById('eduCountryInput');
+            const eduStateSelect = document.getElementById('eduStateSelect');
+            const eduStateInput = document.getElementById('eduStateInput');
+
+            if (eduIntlCheckbox) {
+                eduIntlCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        eduCountryGroup.classList.remove('hidden');
+                        eduCountryInput.setAttribute('required', 'true');
+                        
+                        eduStateSelect.classList.add('hidden');
+                        eduStateSelect.removeAttribute('required');
+                        
+                        eduStateInput.classList.remove('hidden');
+                        eduStateInput.setAttribute('required', 'true');
+                    } else {
+                        eduCountryGroup.classList.add('hidden');
+                        eduCountryInput.removeAttribute('required');
+                        
+                        eduStateSelect.classList.remove('hidden');
+                        eduStateSelect.setAttribute('required', 'true');
+                        
+                        eduStateInput.classList.add('hidden');
+                        eduStateInput.removeAttribute('required');
+                    }
+                });
+            }
+
+            // --- Employment Form Logic ---
+            const intlCheckbox = document.getElementById('empIntlAddress');
+            const countryGroup = document.getElementById('empCountryGroup');
+            const countryInput = document.getElementById('empCountryInput');
+            const stateSelect = document.getElementById('empStateSelect');
+            const stateInput = document.getElementById('empStateInput');
+
+            if (intlCheckbox) {
+                intlCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Show Country field and make it mandatory
+                        countryGroup.classList.remove('hidden');
+                        countryInput.setAttribute('required', 'true');
+                        
+                        // Hide State dropdown, remove its required attribute
+                        stateSelect.classList.add('hidden');
+                        stateSelect.removeAttribute('required');
+                        
+                        // Show State text input, make it mandatory
+                        stateInput.classList.remove('hidden');
+                        stateInput.setAttribute('required', 'true');
+                    } else {
+                        // Hide Country field, remove mandatory flag
+                        countryGroup.classList.add('hidden');
+                        countryInput.removeAttribute('required');
+                        
+                        // Show State dropdown, make it mandatory
+                        stateSelect.classList.remove('hidden');
+                        stateSelect.setAttribute('required', 'true');
+                        
+                        // Hide State text input, remove mandatory flag
+                        stateInput.classList.add('hidden');
+                        stateInput.removeAttribute('required');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
