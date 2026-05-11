@@ -37,6 +37,32 @@
             box-sizing: border-box;
         }
 
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .section-header h3 {
+            margin: 0;
+            font-size: 18px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .remove-link {
+            color: var(--primary-blue);
+            font-size: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .remove-link:hover {
+            text-decoration: underline;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -340,19 +366,81 @@
 
     <!-- EDUCATION FORM -->
     <form class="form-card" id="educationForm" onsubmit="event.preventDefault(); alert('Education Form Submitted successfully!');">
+        
+        <div class="section-header">
+            <h3>Education Details</h3>
+            <a href="#" class="remove-link" onclick="document.getElementById('educationForm').remove(); return false;">Remove</a>
+        </div>
+
+        <div class="radio-group" style="margin-bottom: 24px;">
+            <div class="radio-item">
+                <input type="radio" name="eduAddressType" id="eduUS" value="US" checked>
+                <label for="eduUS" class="checkbox-label" style="color: var(--text-dark); font-weight: bold;">From US</label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="eduAddressType" id="eduOutsideUS" value="Outside">
+                <label for="eduOutsideUS" class="checkbox-label" style="color: var(--text-dark); font-weight: bold;">Outside US</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Degree Earned<span class="required">*</span></label>
+            <select required>
+                <option value="" disabled selected>Select</option>
+                <option value="Bachelors" selected>Bachelors</option>
+                <option value="Masters">Masters</option>
+                <option value="PhD">PhD</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Institution Name<span class="required">*</span></label>
+            <input type="text" value="Stanford University" required>
+        </div>
+
+        <div class="form-group">
+            <label>Major<span class="required">*</span></label>
+            <input type="text" value="Computer Science Engineer" required>
+        </div>
+
+        <div class="form-group">
+            <label>Candidate's First Name (As Per Transcript)<span class="required">*</span></label>
+            <input type="text" value="Debendu" required>
+        </div>
+
+        <div class="form-group">
+            <label>Candidate's Middle Name (As Per Transcript) (Optional)</label>
+            <input type="text" value="">
+        </div>
+
+        <div class="form-group">
+            <label>Candidate's Last Name (As Per Transcript)<span class="required">*</span></label>
+            <input type="text" value="Roy" required>
+        </div>
+
         <div class="form-group flex-row">
             <div class="flex-col">
                 <label>Attended From Date<span class="required">*</span></label>
                 <select required>
-                    <option value="" disabled selected>Select</option>
+                    <option value="" disabled>Select</option>
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July" selected>July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
+                    <option value="October">October</option>
                     <option value="November">November</option>
+                    <option value="December">December</option>
                 </select>
             </div>
             <div class="flex-col">
                 <label>&nbsp;</label>
-                <select required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="2018">2018</option>
+                <select required class="year-dropdown" data-selected="2013">
+                    <option value="" disabled>Select</option>
                 </select>
             </div>
         </div>
@@ -361,15 +449,25 @@
             <div class="flex-col">
                 <label>Attended To Date<span class="required">*</span></label>
                 <select required>
-                    <option value="" disabled selected>Select</option>
+                    <option value="" disabled>Select</option>
+                    <option value="January">January</option>
+                    <option value="February" selected>February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                    <option value="June">June</option>
+                    <option value="July">July</option>
+                    <option value="August">August</option>
+                    <option value="September">September</option>
                     <option value="October">October</option>
+                    <option value="November">November</option>
+                    <option value="December">December</option>
                 </select>
             </div>
             <div class="flex-col">
                 <label>&nbsp;</label>
-                <select required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="2022">2022</option>
+                <select required class="year-dropdown" data-selected="2014">
+                    <option value="" disabled>Select</option>
                 </select>
             </div>
         </div>
@@ -384,9 +482,8 @@
             </div>
             <div class="flex-col">
                 <label>&nbsp;</label>
-                <select required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="2022">2022</option>
+                <select required class="year-dropdown" data-selected="2022">
+                    <option value="" disabled selected>YYYY</option>
                 </select>
             </div>
         </div>
@@ -396,13 +493,6 @@
             <label for="eduNotGraduated" class="checkbox-label">Not Graduated.</label>
         </div>
 
-        <!-- NEW: International Address Checkbox for Education -->
-        <div class="checkbox-group">
-            <input type="checkbox" id="eduIntlAddress">
-            <label for="eduIntlAddress" class="checkbox-label" style="color: var(--text-dark);">International Address</label>
-        </div>
-
-        <!-- Modified: Changed to mandatory -->
         <div class="form-group">
             <label>Institution Address<span class="required">*</span></label>
             <input type="text" value="Brook Street" required>
@@ -413,7 +503,7 @@
             <input type="text" value="Church City" id="eduCityInput" required>
         </div>
 
-        <!-- NEW: Institution Country (Hidden by default, shown if International Address is checked) -->
+        <!-- NEW: Institution Country (Hidden by default, shown if Outside US is selected) -->
         <div class="form-group hidden" id="eduCountryGroup">
             <label>Institution Country<span class="required">*</span></label>
             <select id="eduCountryInput" class="searchable">
@@ -446,7 +536,6 @@
                 <option value="Bulgaria">Bulgaria</option>
                 <option value="Burkina Faso">Burkina Faso</option>
                 <option value="Burundi">Burundi</option>
-                <option value="Côte d'Ivoire">Côte d'Ivoire</option>
                 <option value="Cabo Verde">Cabo Verde</option>
                 <option value="Cambodia">Cambodia</option>
                 <option value="Cameroon">Cameroon</option>
@@ -457,12 +546,13 @@
                 <option value="China">China</option>
                 <option value="Colombia">Colombia</option>
                 <option value="Comoros">Comoros</option>
-                <option value="Congo (Congo-Brazzaville)">Congo (Congo-Brazzaville)</option>
+                <option value="Congo">Congo</option>
                 <option value="Costa Rica">Costa Rica</option>
+                <option value="Cote d'Ivoire">Cote d'Ivoire</option>
                 <option value="Croatia">Croatia</option>
                 <option value="Cuba">Cuba</option>
                 <option value="Cyprus">Cyprus</option>
-                <option value="Czechia (Czech Republic)">Czechia (Czech Republic)</option>
+                <option value="Czech Republic">Czech Republic</option>
                 <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
                 <option value="Denmark">Denmark</option>
                 <option value="Djibouti">Djibouti</option>
@@ -474,7 +564,7 @@
                 <option value="Equatorial Guinea">Equatorial Guinea</option>
                 <option value="Eritrea">Eritrea</option>
                 <option value="Estonia">Estonia</option>
-                <option value="Eswatini (fmr. Swaziland)">Eswatini (fmr. Swaziland)</option>
+                <option value="Eswatini">Eswatini</option>
                 <option value="Ethiopia">Ethiopia</option>
                 <option value="Fiji">Fiji</option>
                 <option value="Finland">Finland</option>
@@ -491,7 +581,6 @@
                 <option value="Guinea-Bissau">Guinea-Bissau</option>
                 <option value="Guyana">Guyana</option>
                 <option value="Haiti">Haiti</option>
-                <option value="Holy See">Holy See</option>
                 <option value="Honduras">Honduras</option>
                 <option value="Hungary">Hungary</option>
                 <option value="Iceland">Iceland</option>
@@ -536,7 +625,7 @@
                 <option value="Montenegro">Montenegro</option>
                 <option value="Morocco">Morocco</option>
                 <option value="Mozambique">Mozambique</option>
-                <option value="Myanmar (formerly Burma)">Myanmar (formerly Burma)</option>
+                <option value="Myanmar">Myanmar</option>
                 <option value="Namibia">Namibia</option>
                 <option value="Nauru">Nauru</option>
                 <option value="Nepal">Nepal</option>
@@ -551,7 +640,7 @@
                 <option value="Oman">Oman</option>
                 <option value="Pakistan">Pakistan</option>
                 <option value="Palau">Palau</option>
-                <option value="Palestine State">Palestine State</option>
+                <option value="Palestine">Palestine</option>
                 <option value="Panama">Panama</option>
                 <option value="Papua New Guinea">Papua New Guinea</option>
                 <option value="Paraguay">Paraguay</option>
@@ -616,7 +705,6 @@
             </select>
         </div>
 
-        <!-- Modified: Default Dropdown for US States, hidden Text Input for Intl -->
         <div class="form-group">
             <label>Institution State<span class="required" id="eduStateAsterisk">*</span></label>
             <select id="eduStateSelect" required>
@@ -676,42 +764,54 @@
             <input type="text" id="eduStateInput" class="hidden" placeholder="Enter State/Province">
         </div>
 
-        <div class="checkbox-group">
-            <input type="checkbox" id="transcript">
-            <label for="transcript" class="checkbox-label">Transcript/Diploma Available</label>
-        </div>
-
         <div class="btn-container">
             <button type="button" class="btn btn-back">Back</button>
             <button type="submit" class="btn btn-continue">Continue</button>
         </div>
     </form>
 
+
     <!-- EMPLOYMENT FORM -->
     <form class="form-card" id="employmentForm" onsubmit="event.preventDefault(); alert('Employment Form Submitted successfully!');">
+        
+        <div class="section-header">
+            <h3>Employment Details</h3>
+            <a href="#" class="remove-link" onclick="document.getElementById('employmentForm').remove(); return false;">Remove</a>
+        </div>
+
+        <div class="radio-group" style="margin-bottom: 24px;">
+            <div class="radio-item">
+                <input type="radio" name="empAddressType" id="empUS" value="US" checked>
+                <label for="empUS" class="checkbox-label" style="color: var(--text-dark); font-weight: bold;">From US</label>
+            </div>
+            <div class="radio-item">
+                <input type="radio" name="empAddressType" id="empOutsideUS" value="Outside">
+                <label for="empOutsideUS" class="checkbox-label" style="color: var(--text-dark); font-weight: bold;">Outside US</label>
+            </div>
+        </div>
+
         <div class="form-group">
             <label>Employer Company Name<span class="required">*</span></label>
-            <input type="text" value="Google" required>
+            <input type="text" placeholder="Name of Employer" required>
         </div>
 
         <div class="form-group">
             <label>Position<span class="required">*</span></label>
-            <input type="text" value="Data Engineering Specialist" required>
+            <input type="text" placeholder="Position" required>
         </div>
 
         <div class="form-group flex-row">
             <div class="flex-col">
                 <label>Month Started<span class="required">*</span></label>
                 <select required>
-                    <option value="" disabled selected>Select</option>
+                    <option value="" disabled selected>Month</option>
                     <option value="February">February</option>
                 </select>
             </div>
             <div class="flex-col">
                 <label>Year Started<span class="required">*</span></label>
-                <select required>
-                    <option value="" disabled selected>Select</option>
-                    <option value="2025">2025</option>
+                <select required class="year-dropdown" data-selected="2025">
+                    <option value="" disabled selected>YYYY</option>
                 </select>
             </div>
         </div>
@@ -720,9 +820,25 @@
             <input type="checkbox" id="selfEmployed">
             <label for="selfEmployed" class="checkbox-label">I am self-employed</label>
         </div>
-        <div class="checkbox-group" style="margin-bottom: 6px;">
+        <div class="checkbox-group" style="margin-bottom: 16px;">
             <input type="checkbox" id="stillWorkHere">
             <label for="stillWorkHere" class="checkbox-label">I still work here</label>
+        </div>
+
+        <div class="form-group flex-row">
+            <div class="flex-col">
+                <label>Month Ended<span class="required">*</span></label>
+                <select required>
+                    <option value="" disabled selected>Month</option>
+                    <option value="February">February</option>
+                </select>
+            </div>
+            <div class="flex-col">
+                <label>Year Ended<span class="required">*</span></label>
+                <select required class="year-dropdown" data-selected="2025">
+                    <option value="" disabled selected>YYYY</option>
+                </select>
+            </div>
         </div>
         
         <div class="radio-group" style="margin-bottom: 24px;">
@@ -737,13 +853,7 @@
             <span class="radio-label-text" style="margin-left: 10px;">Permission to contact</span>
         </div>
 
-        <!-- NEW: International Address Checkbox for Employment -->
-        <div class="checkbox-group" style="margin-bottom: 20px;">
-            <input type="checkbox" id="empIntlAddress">
-            <label for="empIntlAddress" class="checkbox-label" style="color: var(--text-dark); font-weight: bold;">International Address</label>
-        </div>
-
-        <!-- NEW: Country Field (Hidden by default, shown if International Address is checked) -->
+        <!-- NEW: Country Field (Hidden by default, shown if Outside US is selected) -->
         <div class="form-group hidden" id="empCountryGroup">
             <label>Country Name<span class="required">*</span></label>
             <select id="empCountryInput" class="searchable">
@@ -776,7 +886,6 @@
                 <option value="Bulgaria">Bulgaria</option>
                 <option value="Burkina Faso">Burkina Faso</option>
                 <option value="Burundi">Burundi</option>
-                <option value="Côte d'Ivoire">Côte d'Ivoire</option>
                 <option value="Cabo Verde">Cabo Verde</option>
                 <option value="Cambodia">Cambodia</option>
                 <option value="Cameroon">Cameroon</option>
@@ -787,12 +896,13 @@
                 <option value="China">China</option>
                 <option value="Colombia">Colombia</option>
                 <option value="Comoros">Comoros</option>
-                <option value="Congo (Congo-Brazzaville)">Congo (Congo-Brazzaville)</option>
+                <option value="Congo">Congo</option>
                 <option value="Costa Rica">Costa Rica</option>
+                <option value="Cote d'Ivoire">Cote d'Ivoire</option>
                 <option value="Croatia">Croatia</option>
                 <option value="Cuba">Cuba</option>
                 <option value="Cyprus">Cyprus</option>
-                <option value="Czechia (Czech Republic)">Czechia (Czech Republic)</option>
+                <option value="Czech Republic">Czech Republic</option>
                 <option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
                 <option value="Denmark">Denmark</option>
                 <option value="Djibouti">Djibouti</option>
@@ -804,7 +914,7 @@
                 <option value="Equatorial Guinea">Equatorial Guinea</option>
                 <option value="Eritrea">Eritrea</option>
                 <option value="Estonia">Estonia</option>
-                <option value="Eswatini (fmr. Swaziland)">Eswatini (fmr. Swaziland)</option>
+                <option value="Eswatini">Eswatini</option>
                 <option value="Ethiopia">Ethiopia</option>
                 <option value="Fiji">Fiji</option>
                 <option value="Finland">Finland</option>
@@ -821,7 +931,6 @@
                 <option value="Guinea-Bissau">Guinea-Bissau</option>
                 <option value="Guyana">Guyana</option>
                 <option value="Haiti">Haiti</option>
-                <option value="Holy See">Holy See</option>
                 <option value="Honduras">Honduras</option>
                 <option value="Hungary">Hungary</option>
                 <option value="Iceland">Iceland</option>
@@ -866,7 +975,7 @@
                 <option value="Montenegro">Montenegro</option>
                 <option value="Morocco">Morocco</option>
                 <option value="Mozambique">Mozambique</option>
-                <option value="Myanmar (formerly Burma)">Myanmar (formerly Burma)</option>
+                <option value="Myanmar">Myanmar</option>
                 <option value="Namibia">Namibia</option>
                 <option value="Nauru">Nauru</option>
                 <option value="Nepal">Nepal</option>
@@ -881,7 +990,7 @@
                 <option value="Oman">Oman</option>
                 <option value="Pakistan">Pakistan</option>
                 <option value="Palau">Palau</option>
-                <option value="Palestine State">Palestine State</option>
+                <option value="Palestine">Palestine</option>
                 <option value="Panama">Panama</option>
                 <option value="Papua New Guinea">Papua New Guinea</option>
                 <option value="Paraguay">Paraguay</option>
@@ -948,17 +1057,17 @@
 
         <div class="form-group">
             <label>Company Address<span class="required">*</span></label>
-            <input type="text" value="Hill Ford View" required>
+            <input type="text" placeholder="Enter Address Line 1" required>
         </div>
 
         <div class="form-group">
             <label>Zip Code<span class="required">*</span></label>
-            <input type="text" id="empZipCode" class="zip-code-input" placeholder="Enter Zip Code" required>
+            <input type="text" id="empZipCode" class="zip-code-input" placeholder="Enter zip code" required>
         </div>
 
         <div class="form-group">
             <label>City<span class="required" id="empCityAsterisk">*</span></label>
-            <input type="text" id="empCityInput" placeholder="Enter City" required>
+            <input type="text" id="empCityInput" placeholder="Enter city" required>
         </div>
 
         <div class="form-group">
@@ -1029,6 +1138,21 @@
     <!-- Logic for International Address Toggles -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Populate Year Dropdowns ---
+            const yearDropdowns = document.querySelectorAll('.year-dropdown');
+            yearDropdowns.forEach(select => {
+                const selectedYear = select.getAttribute('data-selected');
+                for (let y = 2026; y >= 1940; y--) {
+                    const option = document.createElement('option');
+                    option.value = y;
+                    option.textContent = y;
+                    if (y.toString() === selectedYear) {
+                        option.selected = true;
+                    }
+                    select.appendChild(option);
+                }
+            });
+
             // --- Custom Searchable Select Logic ---
             const searchableSelects = document.querySelectorAll('select.searchable');
             searchableSelects.forEach(select => {
@@ -1133,7 +1257,7 @@
             });
 
             // --- Education Form Logic ---
-            const eduIntlCheckbox = document.getElementById('eduIntlAddress');
+            const eduAddressRadios = document.querySelectorAll('input[name="eduAddressType"]');
             const eduCountryGroup = document.getElementById('eduCountryGroup');
             const eduCountryInput = document.getElementById('eduCountryInput');
             const eduStateSelect = document.getElementById('eduStateSelect');
@@ -1142,44 +1266,45 @@
             const eduCityAsterisk = document.getElementById('eduCityAsterisk');
             const eduStateAsterisk = document.getElementById('eduStateAsterisk');
 
-            if (eduIntlCheckbox) {
-                eduIntlCheckbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        eduCountryGroup.classList.remove('hidden');
-                        eduCountryInput.setAttribute('required', 'true');
-                        
-                        eduStateSelect.classList.add('hidden');
-                        eduStateSelect.removeAttribute('required');
-                        
-                        // State becomes optional for Intl
-                        eduStateInput.classList.remove('hidden');
-                        eduStateInput.removeAttribute('required');
-                        eduStateAsterisk.style.display = 'none';
+            function handleEduAddressChange() {
+                const isOutsideUS = document.querySelector('input[name="eduAddressType"]:checked').value === 'Outside';
+                if (isOutsideUS) {
+                    eduCountryGroup.classList.remove('hidden');
+                    eduCountryInput.setAttribute('required', 'true');
+                    
+                    eduStateSelect.classList.add('hidden');
+                    eduStateSelect.removeAttribute('required');
+                    
+                    // State becomes optional for Intl
+                    eduStateInput.classList.remove('hidden');
+                    eduStateInput.removeAttribute('required');
+                    eduStateAsterisk.style.display = 'none';
 
-                        // City becomes optional for Intl
-                        eduCityInput.removeAttribute('required');
-                        eduCityAsterisk.style.display = 'none';
-                    } else {
-                        eduCountryGroup.classList.add('hidden');
-                        eduCountryInput.removeAttribute('required');
-                        
-                        // State is mandatory for US
-                        eduStateSelect.classList.remove('hidden');
-                        eduStateSelect.setAttribute('required', 'true');
-                        eduStateAsterisk.style.display = 'inline';
-                        
-                        eduStateInput.classList.add('hidden');
-                        eduStateInput.removeAttribute('required');
+                    // City becomes optional for Intl
+                    eduCityInput.removeAttribute('required');
+                    eduCityAsterisk.style.display = 'none';
+                } else {
+                    eduCountryGroup.classList.add('hidden');
+                    eduCountryInput.removeAttribute('required');
+                    
+                    // State is mandatory for US
+                    eduStateSelect.classList.remove('hidden');
+                    eduStateSelect.setAttribute('required', 'true');
+                    eduStateAsterisk.style.display = 'inline';
+                    
+                    eduStateInput.classList.add('hidden');
+                    eduStateInput.removeAttribute('required');
 
-                        // City is mandatory for US
-                        eduCityInput.setAttribute('required', 'true');
-                        eduCityAsterisk.style.display = 'inline';
-                    }
-                });
+                    // City is mandatory for US
+                    eduCityInput.setAttribute('required', 'true');
+                    eduCityAsterisk.style.display = 'inline';
+                }
             }
+            eduAddressRadios.forEach(radio => radio.addEventListener('change', handleEduAddressChange));
+
 
             // --- Employment Form Logic ---
-            const intlCheckbox = document.getElementById('empIntlAddress');
+            const empAddressRadios = document.querySelectorAll('input[name="empAddressType"]');
             const countryGroup = document.getElementById('empCountryGroup');
             const countryInput = document.getElementById('empCountryInput');
             const stateSelect = document.getElementById('empStateSelect');
@@ -1189,52 +1314,54 @@
             const empStateAsterisk = document.getElementById('empStateAsterisk');
             const empZipCode = document.getElementById('empZipCode');
 
-            if (intlCheckbox) {
-                intlCheckbox.addEventListener('change', function() {
-                    if (this.checked) {
-                        // Show Country field and make it mandatory
-                        countryGroup.classList.remove('hidden');
-                        countryInput.setAttribute('required', 'true');
-                        
-                        // Hide State dropdown, remove its required attribute
-                        stateSelect.classList.add('hidden');
-                        stateSelect.removeAttribute('required');
-                        
-                        // Show State text input, make it optional
-                        stateInput.classList.remove('hidden');
-                        stateInput.removeAttribute('required');
-                        empStateAsterisk.style.display = 'none';
+            function handleEmpAddressChange() {
+                const isOutsideUS = document.querySelector('input[name="empAddressType"]:checked').value === 'Outside';
+                if (isOutsideUS) {
+                    // Show Country field and make it mandatory
+                    countryGroup.classList.remove('hidden');
+                    countryInput.setAttribute('required', 'true');
+                    
+                    // Hide State dropdown, remove its required attribute
+                    stateSelect.classList.add('hidden');
+                    stateSelect.removeAttribute('required');
+                    
+                    // Show State text input, make it optional
+                    stateInput.classList.remove('hidden');
+                    stateInput.removeAttribute('required');
+                    empStateAsterisk.style.display = 'none';
 
-                        // City is optional for Intl
-                        empCityInput.removeAttribute('required');
-                        empCityAsterisk.style.display = 'none';
-                    } else {
-                        // Hide Country field, remove mandatory flag
-                        countryGroup.classList.add('hidden');
-                        countryInput.removeAttribute('required');
-                        
-                        // Show State dropdown, make it mandatory
-                        stateSelect.classList.remove('hidden');
-                        stateSelect.setAttribute('required', 'true');
-                        empStateAsterisk.style.display = 'inline';
-                        
-                        // Hide State text input, remove mandatory flag
-                        stateInput.classList.add('hidden');
-                        stateInput.removeAttribute('required');
+                    // City is optional for Intl
+                    empCityInput.removeAttribute('required');
+                    empCityAsterisk.style.display = 'none';
+                } else {
+                    // Hide Country field, remove mandatory flag
+                    countryGroup.classList.add('hidden');
+                    countryInput.removeAttribute('required');
+                    
+                    // Show State dropdown, make it mandatory
+                    stateSelect.classList.remove('hidden');
+                    stateSelect.setAttribute('required', 'true');
+                    empStateAsterisk.style.display = 'inline';
+                    
+                    // Hide State text input, remove mandatory flag
+                    stateInput.classList.add('hidden');
+                    stateInput.removeAttribute('required');
 
-                        // City is mandatory for US
-                        empCityInput.setAttribute('required', 'true');
-                        empCityAsterisk.style.display = 'inline';
-                    }
-                });
+                    // City is mandatory for US
+                    empCityInput.setAttribute('required', 'true');
+                    empCityAsterisk.style.display = 'inline';
+                }
             }
+            empAddressRadios.forEach(radio => radio.addEventListener('change', handleEmpAddressChange));
 
             // --- Zip Code Auto-fill Logic ---
             if (empZipCode) {
                 empZipCode.addEventListener('input', async function(e) {
                     const zip = e.target.value.trim();
+                    const isOutsideUS = document.querySelector('input[name="empAddressType"]:checked').value === 'Outside';
+                    
                     // Only attempt fetch if it's exactly 5 digits and not an international address
-                    if (zip.length === 5 && /^\d+$/.test(zip) && (!intlCheckbox || !intlCheckbox.checked)) {
+                    if (zip.length === 5 && /^\d+$/.test(zip) && !isOutsideUS) {
                         try {
                             const response = await fetch(`https://api.zippopotam.us/us/${zip}`);
                             if (response.ok) {
